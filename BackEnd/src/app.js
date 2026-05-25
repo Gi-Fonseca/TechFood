@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 const routes = require("./routes");
-const multipartParser = require("./middlewares/multipartParser");
+
 
 // Middlewares globais
 app.use(cors());
