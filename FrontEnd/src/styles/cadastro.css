@@ -1,0 +1,267 @@
+/* ==========================================================
+   CADASTRO.CSS — Estilos da página de Cadastro (cadastro.html)
+   Aula 10: Formulário de inserção de novos pratos.
+   ========================================================== */
+
+/* ── Seção principal ─────────────────────────────────────── */
+#secao-cadastro {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ── Toast de Feedback Dinâmico (Sucesso / Erro) ─────────── */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 14px 24px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 500;
+    display: none; /* Controlado via JS mostrarToast() */
+    animation: entrarToast 0.3s ease;
+}
+
+.toast.sucesso {
+    background-color: var(--cor-verde);
+    display: block;
+}
+
+.toast.erro {
+    background-color: var(--cor-vermelho);
+    display: block;
+}
+
+@keyframes entrarToast {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ── Card Container Principal (Estrutura de 2 Colunas) ───── */
+#card-cadastro {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    gap: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    margin-top: 20px;
+}
+
+/* ── Coluna Esquerda: Área de Upload da Foto ──────────────── */
+#area-foto {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#preview-container {
+    width: 100%;
+    max-width: 260px;
+    height: 260px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+#preview-container:hover {
+    border-color: var(--cor-destaque);
+    background: #fff8f2;
+}
+
+#preview-imagem {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#placeholder-foto {
+    text-align: center;
+    color: #94a3b8;
+    padding: 20px;
+}
+
+#placeholder-foto span {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+#placeholder-foto p {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.btn-foto {
+    margin-top: 16px;
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    color: var(--cor-primaria);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.15s;
+    width: 100%;
+    max-width: 260px;
+    text-align: center;
+}
+
+.btn-foto:hover {
+    background: var(--cor-primaria);
+    color: #fff;
+    border-color: var(--cor-primaria);
+}
+
+.info-campo {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* ── Coluna Direita: Campos do Formulário ─────────────────── */
+#area-campos {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-grupo label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--cor-primaria);
+}
+
+.obrigatorio {
+    color: var(--cor-vermelho);
+}
+
+/* Estilização Geral das Inputs, Textarea e Selects */
+.campo-grupo input[type="text"],
+.campo-grupo input[type="number"],
+.campo-grupo textarea,
+.campo-grupo select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #334155;
+    background-color: #fff;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.campo-grupo input:focus,
+.campo-grupo textarea:focus,
+.campo-grupo select:focus {
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
+}
+
+.campo-grupo textarea {
+    resize: none;
+}
+
+/* Contador de caracteres abaixo do Textarea */
+.contador-chars {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-align: right;
+    margin-top: 2px;
+}
+
+/* Fileira Dupla (Preço e Categoria Lado a Lado) */
+.linha-dupla {
+    display: flex;
+    gap: 16px;
+}
+
+.linha-dupla .campo-grupo {
+    flex: 1;
+}
+
+/* ── Grupo de Botões Inferiores ──────────────────────────── */
+.btn-cadastro-grupo {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-cadastro-grupo button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.btn-principal {
+    background: var(--cor-destaque);
+    color: #fff;
+}
+
+.btn-principal:hover {
+    background: #d35400; /* Variação hover escura do laranja */
+}
+
+.btn-secundario {
+    background: none;
+    border: 2px solid var(--cor-vermelho);
+    color: var(--cor-vermelho);
+}
+
+.btn-secundario:hover {
+    background: var(--cor-vermelho);
+    color: #fff;
+}
+
+/* ── Responsividade da Área de Cadastro ───────────────────── */
+@media screen and (max-width: 768px) {
+    #card-cadastro {
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    #area-foto {
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .linha-dupla {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .btn-cadastro-grupo {
+        flex-direction: column-reverse; /* Inverte para o botão "Limpar" ficar por último no celular */
+    }
+}
