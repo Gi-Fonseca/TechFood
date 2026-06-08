@@ -3,9 +3,13 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 const routes = require("./routes");
+<<<<<<< HEAD
+
+=======
+>>>>>>> 10833904c26ae8392dc6372b14371f9885d1774c
 
 
-// Middlewares globais
+
 app.use(cors());
 
 ////////////////////////////// BASE 64 ////////////////////////////////////////////////////////////
