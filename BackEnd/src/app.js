@@ -3,22 +3,24 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 const routes = require("./routes");
-const multipartParser = require("./middlewares/multipartParser");
+
 
 // Middlewares globais
 app.use(cors());
 
-// Aumentar o limite para 10MB (CORRIGIDO)
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ limit: "10mb", extended: true }));
+////////////////////////////// BASE 64 ////////////////////////////////////////////////////////////
 
-// Parser para multipart/form-data (uploads sem multer)
-app.use(multipartParser);
+// Avisa o servidor que ele pode receber textos de até 10MB (necessário para fotos em Base64)
+app.use(express.json({ limit: '10mb' })); 
+// Permite que o servidor entenda dados enviados por formulários comuns
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+// Cria uma "ponte" para que o navegador consiga ver as fotos que estão na pasta 'uploads'
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
-// Servir a pasta de uploads publicamente
-app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
+////////////////////////////// BASE 64 ////////////////////////////////////////////////////////////
 
 // Registro de todas as rotas
 app.use("/", routes);
 
 module.exports = app;
+
