@@ -11,7 +11,7 @@ function renderizarPedidos() {
 
   if (!lista) return;
 
-  const pedidos = JSON.parse(localStorage.getItem("techfood_pedidos") || "[]");
+  const pedidos = JSON.parse(sessionStorage.getItem("techfood_pedidos") || "[]");
 
   if (pedidos.length === 0) {
     lista.innerHTML =

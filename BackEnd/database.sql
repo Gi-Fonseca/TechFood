@@ -62,3 +62,14 @@ INSERT INTO produto (nome, descricao, preco, categoria, disponivel) VALUES
 ('Lasanha de Frango', 'Lasanha com frango desfiado e queijo', 42.00, 'Massa', true),
 ('Pizza Margherita', 'Pizza de mussarela, tomate e manjericão', 50.00, 'Pizza', true),
 ('Suco de Laranja', 'Suco natural 500ml', 12.00, 'Bebida', true);
+
+-- 7. Tabela de Usuários
+CREATE TABLE IF NOT EXISTS usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    papel ENUM('admin', 'cliente') DEFAULT 'cliente',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
