@@ -1,9 +1,9 @@
-const CardapioRepository = require('../repositories/CardapioRepository');
-const ProdutoRepository = require('../repositories/ProdutoRepository');
+const CardapioRepository = require('../repositories/CardapioRepository')
+const ProdutoRepository = require('../repositories/ProdutoRepository')
 
 class CardapioService {
     async listarCardapios() {
-        const cardapios = await CardapioRepository.findAll();
+        const cardapios = await CardapioRepository.findAll()
         return {
             sucesso: true,
             dados: cardapios,
@@ -13,12 +13,12 @@ class CardapioService {
 
     async buscarCardapioPorId(id) {
         if (!id || isNaN(id)) {
-            throw { status: 400, mensagem: "ID inválido" };
+            throw { status: 400, mensagem: "ID inválido" }
         }
 
-        const cardapio = await CardapioRepository.findById(id);
+        const cardapio = await CardapioRepository.findById(id)
         if (!cardapio) {
-            throw { status: 404, mensagem: "Cardápio não encontrado" };
+            throw { status: 404, mensagem: "Cardápio não encontrado" }
         }
 
         return {
@@ -28,10 +28,10 @@ class CardapioService {
     }
 
     async cadastrarCardapio(dados) {
-        const { nome, descricao, disponivel, produtos } = dados;
+        const { nome, descricao, disponivel, produtos } = dados
 
         if (!nome) {
-            throw { status: 400, mensagem: "O nome do cardápio é obrigatório" };
+            throw { status: 400, mensagem: "O nome do cardápio é obrigatório" }
         }
 
         if (!produtos || !Array.isArray(produtos) || produtos.length === 0) {
@@ -39,11 +39,11 @@ class CardapioService {
         }
 
         // Valida se todos os produtos realmente existem e remove duplicados usando Set
-        const produtosUnicos = [...new Set(produtos)];
+        const produtosUnicos = [...new Set(produtos)]
         for (const produtoId of produtosUnicos) {
-            const produtoExistente = await ProdutoRepository.findById(produtoId);
+            const produtoExistente = await ProdutoRepository.findById(produtoId)
             if (!produtoExistente) {
-                throw { status: 404, mensagem: `Produto com ID ${produtoId} não encontrado. Cadastro de cardápio cancelado.` };
+                throw { status: 404, mensagem: `Produto com ID ${produtoId} não encontrado. Cadastro de cardápio cancelado.` }
             }
         }
 
@@ -53,7 +53,7 @@ class CardapioService {
             disponivel: disponivel ?? true
         };
 
-        const id = await CardapioRepository.create(novoCardapio, produtosUnicos);
+        const id = await CardapioRepository.create(novoCardapio, produtosUnicos)
 
         return {
             sucesso: true,
@@ -64,15 +64,15 @@ class CardapioService {
 
     async deletarCardapio(id) {
         if (!id || isNaN(id)) {
-            throw { status: 400, mensagem: "ID inválido" };
+            throw { status: 400, mensagem: "ID inválido" }
         }
 
         const existe = await CardapioRepository.findById(id);
         if (!existe) {
-            throw { status: 404, mensagem: "Cardápio não encontrado" };
+            throw { status: 404, mensagem: "Cardápio não encontrado" }
         }
 
-        await CardapioRepository.delete(id);
+        await CardapioRepository.delete(id)
 
         return {
             sucesso: true,

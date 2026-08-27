@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+const pool = require('../config/database')
 
 class UsuarioRepository {
     async create(usuarioData) {
@@ -7,18 +7,18 @@ class UsuarioRepository {
             'INSERT INTO usuario (nome, email, senha, papel) VALUES (?, ?, ?, ?)',
             [nome, email, senha, papel || 'cliente']
         );
-        return result.insertId;
+        return result.insertId
     }
 
     async findByEmail(email) {
-        const [rows] = await pool.query('SELECT * FROM usuario WHERE email = ?', [email]);
-        return rows[0];
+        const [rows] = await pool.query('SELECT * FROM usuario WHERE email = ?', [email])
+        return rows[0]
     }
 
     async findById(id) {
-        const [rows] = await pool.query('SELECT id, nome, email, papel, criado_em FROM usuario WHERE id = ?', [id]);
-        return rows[0];
+        const [rows] = await pool.query('SELECT id, nome, email, papel, criado_em FROM usuario WHERE id = ?', [id])
+        return rows[0]
     }
 }
 
-module.exports = new UsuarioRepository();
+module.exports = new UsuarioRepository()

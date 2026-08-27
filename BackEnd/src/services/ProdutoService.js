@@ -1,12 +1,12 @@
 // services/ProdutoService.js
 
-const ProdutoRepository = require('../repositories/ProdutoRepository');
+const ProdutoRepository = require('../repositories/ProdutoRepository')
 
 class ProdutoService {
 
     async listarProdutos() {
 
-        const produtos = await ProdutoRepository.findAll();
+        const produtos = await ProdutoRepository.findAll()
 
         return {
             sucesso: true,
@@ -26,7 +26,7 @@ class ProdutoService {
 
         }
 
-        const produto = await ProdutoRepository.findById(id);
+        const produto = await ProdutoRepository.findById(id)
 
         if (!produto) {
 
@@ -105,7 +105,7 @@ class ProdutoService {
 
         }
 
-        const existe = await ProdutoRepository.findById(id);
+        const existe = await ProdutoRepository.findById(id)
 
         if (!existe) {
 
@@ -116,7 +116,7 @@ class ProdutoService {
 
         }
 
-        const atualizado = {};
+        const atualizado = {}
 
         const {
             nome,
@@ -146,19 +146,19 @@ class ProdutoService {
 
             }
 
-            atualizado.preco = preco;
+            atualizado.preco = preco
         }
 
         if (categoria !== undefined) {
-            atualizado.categoria = categoria;
+            atualizado.categoria = categoria
         }
 
         if (disponivel !== undefined) {
-            atualizado.disponivel = disponivel;
+            atualizado.disponivel = disponivel
         }
 
         if (foto !== undefined) {
-            atualizado.foto = foto;
+            atualizado.foto = foto
         }
 
         if (Object.keys(atualizado).length === 0) {
@@ -170,7 +170,7 @@ class ProdutoService {
 
         }
 
-        await ProdutoRepository.update(id, atualizado);
+        await ProdutoRepository.update(id, atualizado)
 
         return {
 
@@ -191,7 +191,7 @@ class ProdutoService {
 
         }
 
-        const existe = await ProdutoRepository.findById(id);
+        const existe = await ProdutoRepository.findById(id)
 
         if (!existe) {
 
@@ -202,7 +202,7 @@ class ProdutoService {
 
         }
 
-        await ProdutoRepository.delete(id);
+        await ProdutoRepository.delete(id)
 
         return {
 
@@ -213,4 +213,4 @@ class ProdutoService {
     }
 }
 
-module.exports = new ProdutoService();
+module.exports = new ProdutoService()

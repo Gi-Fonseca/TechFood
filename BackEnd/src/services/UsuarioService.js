@@ -1,30 +1,29 @@
-const UsuarioRepository = require('../repositories/UsuarioRepository');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const UsuarioRepository = require('../repositories/UsuarioRepository')
+const bcrypt = require ('bcryptjs')
+const JWT = require ('jsonwebtoken')
 
-// A chave secreta idealmente deve vir do .env
-const JWT_SECRET = process.env.JWT_SECRET || 'chave_super_secreta_sabor_digital_123';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'chave_super_secreta_sabor_digital_123'
 
 class UsuarioService {
     async registrarUsuario(dados) {
-        const { nome, email, senha, papel } = dados;
+        const { nome, email, senha, papel } = dados
 
         if (!nome || !email || !senha) {
-            throw { status: 400, mensagem: "Nome, e-mail e senha são obrigatórios" };
+            throw { status: 400, mensagem: "Senha, nome e email: Obrigatorios" }
         }
 
-        // Verifica se o email já existe
-        const usuarioExistente = await UsuarioRepository.findByEmail(email);
+        const usuarioExistente = await UsuarioRepository.findByEmail(email)
         if (usuarioExistente) {
-            throw { status: 409, mensagem: "E-mail já está em uso" };
+            throw { status: 409, mensagem: "Esse E-mail já está em uso" }
         }
 
-        // Criptografar a senha
-        const salt = await bcrypt.genSalt(10);
-        const senhaHash = await bcrypt.hash(senha, salt);
 
-        // Define o papel (se não for admin, por padrão é cliente)
-        const role = (papel === 'admin') ? 'admin' : 'cliente';
+        const salt = await bcrypt.genSalt(10)
+        const senhaHash = await bcrypt.hash(senha, salt)
+
+
+        const role = (papel === 'admin') ? 'admin' : 'cliente'
 
         const novoId = await UsuarioRepository.create({
             nome,
@@ -39,21 +38,20 @@ class UsuarioService {
             id: novoId
         };
     }
-
-    async login(email, senha) {
+        async login(email, senha) {
         if (!email || !senha) {
-            throw { status: 400, mensagem: "E-mail e senha são obrigatórios" };
+            throw { status: 400, mensagem: "Senha e email: Obrigatorios" }
         }
 
-        const usuario = await UsuarioRepository.findByEmail(email);
+        const usuario = await UsuarioRepository.findByEmail(email)
         if (!usuario) {
-            throw { status: 401, mensagem: "Credenciais inválidas" };
+            throw { status: 401, mensagem: "Senha e email invalidos" }
         }
 
         // Validar a senha
-        const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+        const senhaCorreta = await bcrypt.compare(senha, usuario.senha)
         if (!senhaCorreta) {
-            throw { status: 401, mensagem: "Credenciais inválidas" };
+            throw { status: 401, mensagem: "Senha e email invalidos" }
         }
 
         // Gerar o JWT
@@ -77,4 +75,5 @@ class UsuarioService {
     }
 }
 
-module.exports = new UsuarioService();
+module.exports = new UsuarioService()
+
