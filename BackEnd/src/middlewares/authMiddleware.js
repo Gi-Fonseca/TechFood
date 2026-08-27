@@ -8,7 +8,7 @@ const verificarToken = (req, res, next) => {
     }
     const parts = authHeader.split(' ');
     if (parts.length !== 2 || parts[0] !== 'Bearer') {
-        return res.status(401).json({ sucesso: false, mensagem: "Token inválido (Formato esperado: Bearer <token>)" })
+        return res.status(401).json({ sucesso: false, mensagem: "Token inválido" })
     }
     const token = parts[1];
     try {
@@ -23,7 +23,7 @@ const verificarToken = (req, res, next) => {
 
 const verificarAdmin = (req, res, next) => {
     if (req.usuarioPapel !== 'admin') {
-        return res.status(403).json({ sucesso: false, mensagem: "Acesso negado. Apenas administradores podem realizar esta ação." })
+        return res.status(403).json({ sucesso: false, mensagem: "Apenas administradores podem realizar esta ação" })
     }
     return next()
 }
