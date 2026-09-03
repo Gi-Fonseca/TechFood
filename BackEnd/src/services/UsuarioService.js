@@ -1,9 +1,9 @@
 const UsuarioRepository = require('../repositories/UsuarioRepository')
 const bcrypt = require ('bcryptjs')
-const JWT = require ('jsonwebtoken')
+const jwt = require ('jsonwebtoken')
 
 
-const JWT_SECRET = process.env.JWT_SECRET || 'chave_super_secreta_sabor_digital_123'
+const JWT_SECRET = process.env.JWT_SECRET || '123'
 
 class UsuarioService {
     async registrarUsuario(dados) {
