@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const PedidoController = require('../controllers/PedidoController')
+const {autenticarToken} = require('../middlewares/authMiddleware'); 
 
+
+router.use(autenticarToken);
 router.post('/', PedidoController.create)
 router.get('/', PedidoController.getAll)
 router.get('/:id', PedidoController.getById)

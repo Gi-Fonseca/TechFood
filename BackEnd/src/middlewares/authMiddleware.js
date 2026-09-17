@@ -29,6 +29,6 @@ const verificarAdmin = (req, res, next) => {
 }
 
 module.exports = {
-    verificarToken,
+    autenticarToken: verificarToken, 
     verificarAdmin
 }
